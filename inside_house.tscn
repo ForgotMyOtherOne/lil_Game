@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://c75225gvagonw"]
+
+[ext_resource type="Texture2D" uid="uid://5g8ajth8lyi5" path="res://assets/house.png" id="1_qn2ct"]
+[ext_resource type="Script" uid="uid://by883m283t67x" path="res://inside_house.gd" id="1_yn6d1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yn6d1"]
+texture = ExtResource("1_qn2ct")
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+8:3/0 = 0
+8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, 2.877739, 8, 3.057598, -8)
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 2.6978798, 8, 2.877739, -8, 8, -8)
+5:5/0 = 0
+6:5/0 = 0
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -2.877739, 8, -2.877739, 8, -8, -8, -8)
+8:5/0 = 0
+8:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -2.6978807, -8, -2.877739, -8, -8, 8, -8)
+9:5/0 = 0
+9:4/0 = 0
+9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.4173164, 8, -8, 8, -8, -8, -3.4173164, -8)
+9:3/0 = 0
+9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.4173164, 8, -8, 8, -8, -8, -2.87774, -8)
+9:2/0 = 0
+7:5/0 = 0
+7:4/0 = 0
+1:5/0 = 0
+1:4/0 = 0
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, 1.0791531, 8, 0.8992939, 8, 8)
+0:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_10rr3"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_yn6d1")
+
+[node name="Inside house" type="Node2D"]
+script = ExtResource("1_yn6d1")
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_10rr3")
+format = 2
+layer_0/tile_data = PackedInt32Array(589839, 327680, 1, 589838, 327680, 2, 589837, 393216, 2, 589836, 458752, 1, 589835, 524288, 2, 524299, 327680, 1, 458763, 327680, 1, 393227, 327680, 1, 393228, 327680, 1, 393229, 327680, 1, 393230, 327680, 1, 393231, 458752, 2, 458767, 327680, 1, 524303, 327680, 1, 524302, 327680, 1, 524301, 327680, 1, 524300, 327680, 1, 458764, 327680, 1, 458765, 327680, 2, 458766, 327680, 1, 655372, 393216, 5, 655371, 393216, 5, 655374, 393216, 5, 655375, 393216, 5, 655370, 327680, 5, 655376, 589824, 5, 589840, 589824, 4, 524304, 589824, 4, 458768, 589824, 4, 393232, 589824, 4, 589834, 327680, 4, 524298, 327680, 4, 458762, 327680, 4, 393226, 327680, 4, 327691, 393216, 3, 327692, 393216, 3, 327693, 393216, 3, 327694, 393216, 3, 327695, 393216, 3, 327690, 327680, 3, 327696, 589824, 3, 655373, 0, 4)
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(649, 481)
