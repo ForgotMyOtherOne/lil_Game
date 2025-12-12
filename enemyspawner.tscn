@@ -8,13 +8,8 @@ script = ExtResource("1_shps6")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
-[node name="Marker2D2" type="Marker2D" parent="."]
-position = Vector2(24, 0)
-
-[node name="Marker2D3" type="Marker2D" parent="."]
-position = Vector2(10, -12)
-
 [node name="Timer" type="Timer" parent="."]
+autostart = true
 ignore_time_scale = true
 
 [node name="Skeleton" parent="." instance=ExtResource("2_ju1km")]

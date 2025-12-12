@@ -1,8 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://bqfgb644oqmno"]
+[gd_scene load_steps=28 format=3 uid="uid://bqfgb644oqmno"]
 
-[ext_resource type="Script" uid="uid://ingds3yaj0ow" path="res://player.gd" id="1_pyidc"]
 [ext_resource type="Script" uid="uid://dqn7epvq0cgbh" path="res://root.gd" id="1_qwhpj"]
-[ext_resource type="Texture2D" uid="uid://b5jetjcoi78rp" path="res://playerStuff/cat.png" id="2_vvh5c"]
 [ext_resource type="Texture2D" uid="uid://eaimucqq3p3" path="res://assets/animatedSprites.png" id="3_jnlp7"]
 [ext_resource type="Texture2D" uid="uid://cqnvsfhfbxmlm" path="res://assets/tilessprites.png" id="3_vvh5c"]
 [ext_resource type="Texture2D" uid="uid://gb0lrfatgwvs" path="res://assets/Background Sprites 2.png" id="4_28aoi"]
@@ -14,106 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://ne6mo8t6d8yx" path="res://assets/mountain.png" id="11_gd4vy"]
 [ext_resource type="Texture2D" uid="uid://5g8ajth8lyi5" path="res://assets/house.png" id="12_qw60f"]
 [ext_resource type="PackedScene" uid="uid://bfy6xgx8eswyh" path="res://scene_trigger.tscn" id="13_eji0w"]
+[ext_resource type="PackedScene" uid="uid://db4hdyqllwd44" path="res://player.tscn" id="14_qwhpj"]
+[ext_resource type="PackedScene" uid="uid://cv8ybqftbkf41" path="res://heartscontainer.tscn" id="15_qt76e"]
 [ext_resource type="PackedScene" uid="uid://clfbxyg4dlhhc" path="res://enemyspawner.tscn" id="16_sq7yr"]
-
-[sub_resource type="Animation" id="Animation_vvh5c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_pyidc"]
-resource_name = "walk_Down"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_jnlp7"]
-resource_name = "walk_Left"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_l8v81"]
-resource_name = "walk_Right"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_28aoi"]
-resource_name = "walk_Up"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jnlp7"]
-_data = {
-&"RESET": SubResource("Animation_vvh5c"),
-&"walk_Down": SubResource("Animation_pyidc"),
-&"walk_Left": SubResource("Animation_jnlp7"),
-&"walk_Right": SubResource("Animation_l8v81"),
-&"walk_Up": SubResource("Animation_28aoi")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qw60f"]
-size = Vector2(27, 31)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l8v81"]
 texture = ExtResource("3_jnlp7")
@@ -494,43 +395,17 @@ sources/8 = SubResource("TileSetAtlasSource_qwhpj")
 sources/9 = SubResource("TileSetAtlasSource_qt76e")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwhpj"]
-size = Vector2(46, 46)
+size = Vector2(64, 36)
 
 [node name="root" type="Node2D"]
 z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_qwhpj")
 
-[node name="player" type="CharacterBody2D" parent="." groups=["player"]]
-y_sort_enabled = true
-position = Vector2(2679, -1928)
-collision_layer = 9
-slide_on_ceiling = false
-script = ExtResource("1_pyidc")
-speed = 500
-
-[node name="Sprite2D" type="Sprite2D" parent="player"]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(3.0517578e-05, 4.0000057)
-scale = Vector2(2.5148828, 2.5148826)
-texture = ExtResource("2_vvh5c")
-centered = false
-offset = Vector2(-10, -22)
-hframes = 4
-vframes = 2
-frame = 7
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-libraries = {
-&"": SubResource("AnimationLibrary_jnlp7")
-}
-
-[node name="Camera2D" type="Camera2D" parent="player"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(0, -12)
-shape = SubResource("RectangleShape2D_qw60f")
+[node name="player" parent="." instance=ExtResource("14_qwhpj")]
+z_index = 0
+position = Vector2(0, -2324)
+knockbackpower = 2000
 
 [node name="Overworld" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -563,16 +438,32 @@ layer_3/tile_data = PackedInt32Array(-2490312, 9, 0, -3276798, 65544, 1)
 position = Vector2(2681, -2001)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]
-position = Vector2(0, -2)
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_qwhpj")
 
 [node name="EntranceMarkers" type="Node2D" parent="."]
-position = Vector2(2323, -1569)
+position = Vector2(2822, -1890)
 
 [node name="Outside" type="Marker2D" parent="EntranceMarkers"]
-position = Vector2(-2275, -757)
+position = Vector2(31, -178)
+
+[node name="Start" type="Marker2D" parent="EntranceMarkers"]
+position = Vector2(-177, 193)
 
 [node name="enemyspawner" parent="." instance=ExtResource("16_sq7yr")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-56, -2500)
+spawn_interval = 7
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="heartscontainer" parent="CanvasLayer" instance=ExtResource("15_qt76e")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -219.0
+offset_right = -149.33325
+offset_bottom = 0.6666667
+grow_horizontal = 0
+scale = Vector2(3, 3)

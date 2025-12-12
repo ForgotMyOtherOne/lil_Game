@@ -1,20 +1,20 @@
 extends Node2D
 
-@onready var main = get_node(".")
+@onready var spawn_point: Marker2D = $Marker2D
+@onready var timer: Timer = $Timer
+
 var skeleton_scene := preload("res://skeleton.tscn")
-var spawn_points: Array[Marker2D] = []
+
+@export var spawn_interval := 5   
 
 func _ready():
-	for child in get_children():
-		if child is Marker2D:
-			spawn_points.append(child)
+	timer.wait_time = spawn_interval
+	timer.autostart = true
+	timer.one_shot = false
+	timer.timeout.connect(_on_timer_timeout)
 
 func _on_timer_timeout():
-	if spawn_points.is_empty():
-		push_warning("No spawn points!")
-		return
-
-	var spawn_point = spawn_points[randi() % spawn_points.size()]
-	var skeleton = skeleton_scene.instantiate()
-	skeleton.position = spawn_point.position
-	main.add_child(skeleton)
+	var skeleton := skeleton_scene.instantiate()
+	skeleton.global_position = spawn_point.global_position
+	get_parent().add_child(skeleton)
+	print("spawn")

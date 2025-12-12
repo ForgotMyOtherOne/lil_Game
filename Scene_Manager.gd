@@ -2,38 +2,97 @@ class_name SceneManager
 extends Node
 
 var player: Player
-var last_scene_name: String
+var first_load := true
+var last_scene_name := ""
 
 const SCENE_DIR := "res://"
 
 func _ready():
-	# Player is always in group "player"
 	player = get_tree().get_first_node_in_group("player")
 	if not player:
-		push_error("SceneManager: No player found in group 'player'")
+		push_error("SceneManager: No player in 'player' group!")
 		return
+
 
 func change_scene(to_scene_name: String) -> void:
 	if not player:
-		push_error("SceneManager: player is null!")
+		push_error("SceneManager: player is null")
 		return
 
-	var current_scene = get_tree().current_scene
-	if not current_scene:
-		push_error("SceneManager: current scene is null")
-		return
+	var current_scene := get_tree().current_scene
+	if current_scene:
+		# Save where we are coming from
+		if first_load:
+			last_scene_name = "Start"      # <--- DEFAULT FIRST SPAWN MARKER
+			first_load = false
+		else:
+			last_scene_name = current_scene.name
+	else:
+		last_scene_name = "Start"
 
-	last_scene_name = current_scene.name
-
-	# Remove player from the current scene
+	# Remove the player before switching
 	if player.get_parent():
 		player.get_parent().remove_child(player)
 
 	var full_path = SCENE_DIR + to_scene_name + ".tscn"
 	call_deferred("_finish_scene_change", full_path)
 
+
 func _finish_scene_change(full_path: String) -> void:
 	get_tree().change_scene_to_file(full_path)
+#==========================================================
+#
+#class_name SceneManager
+#extends Node
+#
+#var player: Player
+#var first_load := true
+#var last_scene_name := ""
+#
+#const SCENE_DIR := "res://"
+#
+#func _ready() -> void:
+	#player = get_tree().get_first_node_in_group("player")
+	#if not player:
+		#push_error("SceneManager: No player in group 'player'")
+		#return
+#
+#
+#func change_scene(to_scene_name: String) -> void:
+	#if not player:
+		#push_error("SceneManager: player is null")
+		#return
+#
+	#var current_scene := get_tree().current_scene
+	#if current_scene:
+		#last_scene_name = current_scene.name
+#
+	## Remove player from old scene
+	#if player.get_parent():
+		#player.get_parent().remove_child(player)
+#
+	#var full_path := SCENE_DIR + to_scene_name + ".tscn"
+	#call_deferred("_finish_scene_change", full_path)
+#
+#
+#func _finish_scene_change(full_path: String):
+	## Change scene
+	#get_tree().change_scene_to_file(full_path)
+#
+	## Wait one frame, then add the player to the root
+	#await get_tree().process_frame
+#
+	#get_tree().current_scene.add_child(player)
+	#player.owner = get_tree().current_scene
+#
+#
+#
+#
+#
+
+
+
+
 #var scene_dir_path = "res://"
 #
 #func change_scene(to_scene_name: String) -> void:

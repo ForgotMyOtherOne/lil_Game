@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4ivk2gc5ry85"]
+[gd_scene load_steps=26 format=3 uid="uid://c4ivk2gc5ry85"]
 
 [ext_resource type="Texture2D" uid="uid://dktva8phyrmk4" path="res://assets/enemy-export.png" id="1_crlql"]
 [ext_resource type="Script" uid="uid://b565ioaer60b2" path="res://skeleton.gd" id="1_plk42"]
@@ -177,19 +177,30 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_plk42"]
-size = Vector2(28, 43)
+size = Vector2(38, 41.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6xse"]
+size = Vector2(38, 41)
 
 [node name="Skeleton" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_plk42")
+speed = 80.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)
 scale = Vector2(2.58, 2.58)
 sprite_frames = SubResource("SpriteFrames_iyyii")
 animation = &"walkUp"
-frame_progress = 0.5700497
+frame_progress = 0.9639942
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -21)
 shape = SubResource("RectangleShape2D_plk42")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_r6xse")
+debug_color = Color(0.5037288, 0.4949029, 0.8016351, 0.41960785)

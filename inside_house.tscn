@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c75225gvagonw"]
+[gd_scene load_steps=8 format=3 uid="uid://c75225gvagonw"]
 
 [ext_resource type="Script" uid="uid://dmp74hvduwyec" path="res://SceneTrigger.gd" id="1_10rr3"]
 [ext_resource type="Texture2D" uid="uid://5g8ajth8lyi5" path="res://assets/house.png" id="1_qn2ct"]
 [ext_resource type="PackedScene" uid="uid://bfy6xgx8eswyh" path="res://scene_trigger.tscn" id="3_gkw0i"]
-[ext_resource type="Script" uid="uid://ingds3yaj0ow" path="res://player.gd" id="4_xypit"]
-[ext_resource type="Texture2D" uid="uid://b5jetjcoi78rp" path="res://playerStuff/cat.png" id="5_giixd"]
+[ext_resource type="PackedScene" uid="uid://db4hdyqllwd44" path="res://player.tscn" id="4_gkw0i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yn6d1"]
 texture = ExtResource("1_qn2ct")
@@ -51,105 +50,6 @@ sources/0 = SubResource("TileSetAtlasSource_yn6d1")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xypit"]
 size = Vector2(47, 43)
 
-[sub_resource type="Animation" id="Animation_vvh5c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_pyidc"]
-resource_name = "walk_Down"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_jnlp7"]
-resource_name = "walk_Left"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_l8v81"]
-resource_name = "walk_Right"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_28aoi"]
-resource_name = "walk_Up"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jnlp7"]
-_data = {
-&"RESET": SubResource("Animation_vvh5c"),
-&"walk_Down": SubResource("Animation_pyidc"),
-&"walk_Left": SubResource("Animation_jnlp7"),
-&"walk_Right": SubResource("Animation_l8v81"),
-&"walk_Up": SubResource("Animation_28aoi")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_giixd"]
-size = Vector2(27, 31)
-
 [node name="Inside house" type="Node2D"]
 script = ExtResource("1_10rr3")
 
@@ -171,33 +71,5 @@ target_scene = "root"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]
 shape = SubResource("RectangleShape2D_xypit")
 
-[node name="player" type="CharacterBody2D" parent="." groups=["player"]]
-y_sort_enabled = true
-position = Vector2(648, 474)
-collision_layer = 9
-slide_on_ceiling = false
-script = ExtResource("4_xypit")
-speed = 500
-
-[node name="Sprite2D" type="Sprite2D" parent="player"]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(3.0517578e-05, 4.0000057)
-scale = Vector2(2.5148828, 2.5148826)
-texture = ExtResource("5_giixd")
-centered = false
-offset = Vector2(-10, -22)
-hframes = 4
-vframes = 2
-frame = 7
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-libraries = {
-&"": SubResource("AnimationLibrary_jnlp7")
-}
-
-[node name="Camera2D" type="Camera2D" parent="player"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(0, -12)
-shape = SubResource("RectangleShape2D_giixd")
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_gkw0i")]
+position = Vector2(648, 462)
