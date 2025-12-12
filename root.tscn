@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bqfgb644oqmno"]
+[gd_scene load_steps=35 format=3 uid="uid://bqfgb644oqmno"]
 
 [ext_resource type="Script" uid="uid://ingds3yaj0ow" path="res://player.gd" id="1_pyidc"]
 [ext_resource type="Script" uid="uid://dqn7epvq0cgbh" path="res://root.gd" id="1_qwhpj"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ne6mo8t6d8yx" path="res://assets/mountain.png" id="11_gd4vy"]
 [ext_resource type="Texture2D" uid="uid://5g8ajth8lyi5" path="res://assets/house.png" id="12_qw60f"]
 [ext_resource type="PackedScene" uid="uid://bfy6xgx8eswyh" path="res://scene_trigger.tscn" id="13_eji0w"]
+[ext_resource type="PackedScene" uid="uid://clfbxyg4dlhhc" path="res://enemyspawner.tscn" id="16_sq7yr"]
 
 [sub_resource type="Animation" id="Animation_vvh5c"]
 length = 0.001
@@ -569,4 +570,9 @@ shape = SubResource("RectangleShape2D_qwhpj")
 position = Vector2(2323, -1569)
 
 [node name="Outside" type="Marker2D" parent="EntranceMarkers"]
-position = Vector2(-1656, 1999)
+position = Vector2(-2275, -757)
+
+[node name="enemyspawner" parent="." instance=ExtResource("16_sq7yr")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-56, -2500)
