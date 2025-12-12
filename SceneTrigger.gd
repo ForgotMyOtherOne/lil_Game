@@ -1,8 +1,7 @@
 class_name SceneTrigger
-extends Area2D
+extends Node2D
 
 @export var target_scene: String
-
 
 func _on_body_entered(body):
 	if body is Player:

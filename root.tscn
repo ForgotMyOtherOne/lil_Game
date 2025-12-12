@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://bqfgb644oqmno"]
+[gd_scene load_steps=34 format=3 uid="uid://bqfgb644oqmno"]
 
 [ext_resource type="Script" uid="uid://ingds3yaj0ow" path="res://player.gd" id="1_pyidc"]
+[ext_resource type="Script" uid="uid://dqn7epvq0cgbh" path="res://root.gd" id="1_qwhpj"]
 [ext_resource type="Texture2D" uid="uid://b5jetjcoi78rp" path="res://playerStuff/cat.png" id="2_vvh5c"]
 [ext_resource type="Texture2D" uid="uid://eaimucqq3p3" path="res://assets/animatedSprites.png" id="3_jnlp7"]
 [ext_resource type="Texture2D" uid="uid://cqnvsfhfbxmlm" path="res://assets/tilessprites.png" id="3_vvh5c"]
@@ -497,10 +498,11 @@ size = Vector2(46, 46)
 [node name="root" type="Node2D"]
 z_index = -1
 y_sort_enabled = true
+script = ExtResource("1_qwhpj")
 
 [node name="player" type="CharacterBody2D" parent="." groups=["player"]]
 y_sort_enabled = true
-position = Vector2(641, 363)
+position = Vector2(2679, -1928)
 collision_layer = 9
 slide_on_ceiling = false
 script = ExtResource("1_pyidc")
@@ -556,11 +558,15 @@ layer_3/y_sort_enabled = true
 layer_3/z_index = 1
 layer_3/tile_data = PackedInt32Array(-2490312, 9, 0, -3276798, 65544, 1)
 
-[node name="Node2D" type="Node2D" parent="."]
-
 [node name="SceneTrigger" parent="." instance=ExtResource("13_eji0w")]
 position = Vector2(2681, -2001)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_qwhpj")
+
+[node name="EntranceMarkers" type="Node2D" parent="."]
+position = Vector2(2323, -1569)
+
+[node name="Outside" type="Marker2D" parent="EntranceMarkers"]
+position = Vector2(-1656, 1999)
