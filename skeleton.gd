@@ -6,6 +6,9 @@ extends CharacterBody2D
 @export var wander_change_interval := 2.5
 @export var initial_drop_time := 1.5
 
+var justachange: bool = false
+
+
 var player: Node2D = null
 var playerchase := false
 var direction := Vector2.ZERO
