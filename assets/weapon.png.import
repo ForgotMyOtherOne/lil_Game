@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chps00rhkkrt8"
-path="res://.godot/imported/animatedSprites.png-9baca5b895e3aabae05ceb0f11734e5e.ctex"
+uid="uid://bb8arhyui6p0n"
+path="res://.godot/imported/weapon.png-156d87a8e23913089131baaace3a146f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animatedSprites.png"
-dest_files=["res://.godot/imported/animatedSprites.png-9baca5b895e3aabae05ceb0f11734e5e.ctex"]
+source_file="res://assets/weapon.png"
+dest_files=["res://.godot/imported/weapon.png-156d87a8e23913089131baaace3a146f.ctex"]
 
 [params]
 

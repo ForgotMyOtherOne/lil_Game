@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c75225gvagonw"]
 
 [ext_resource type="Script" uid="uid://dmp74hvduwyec" path="res://SceneTrigger.gd" id="1_10rr3"]
-[ext_resource type="Texture2D" uid="uid://5g8ajth8lyi5" path="res://assets/house.png" id="1_qn2ct"]
+[ext_resource type="Texture2D" uid="uid://max4vgbblt5t" path="res://assets/house.png" id="1_qn2ct"]
 [ext_resource type="PackedScene" uid="uid://bfy6xgx8eswyh" path="res://scene_trigger.tscn" id="3_gkw0i"]
 [ext_resource type="PackedScene" uid="uid://db4hdyqllwd44" path="res://player.tscn" id="4_gkw0i"]
 
@@ -66,6 +66,8 @@ position = Vector2(649, 462)
 
 [node name="SceneTrigger" parent="." instance=ExtResource("3_gkw0i")]
 position = Vector2(648, 506)
+collision_layer = 1
+collision_mask = 10
 target_scene = "root"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]

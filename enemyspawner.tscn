@@ -13,3 +13,5 @@ autostart = true
 ignore_time_scale = true
 
 [node name="Skeleton" parent="." instance=ExtResource("2_ju1km")]
+collision_layer = 0
+collision_mask = 0

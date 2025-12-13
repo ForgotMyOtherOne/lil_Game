@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://c4ivk2gc5ry85"]
+[gd_scene load_steps=28 format=3 uid="uid://c4ivk2gc5ry85"]
 
-[ext_resource type="Texture2D" uid="uid://dktva8phyrmk4" path="res://assets/enemy-export.png" id="1_crlql"]
+[ext_resource type="Texture2D" uid="uid://dfgswpi5fham4" path="res://assets/enemy-export.png" id="1_crlql"]
 [ext_resource type="Script" uid="uid://b565ioaer60b2" path="res://skeleton.gd" id="1_plk42"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plk42"]
@@ -177,15 +177,23 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_plk42"]
-size = Vector2(38, 41.25)
+size = Vector2(38, 39.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6xse"]
-size = Vector2(38, 41)
+size = Vector2(50, 49)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_plk42"]
+normal = Vector2(0.83346033, -0.5525793)
+distance = 579.9831
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_plk42"]
+radius = 529.1597
 
 [node name="Skeleton" type="CharacterBody2D"]
-collision_layer = 4
+z_index = 1
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_plk42")
-speed = 80.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)
@@ -195,12 +203,39 @@ animation = &"walkUp"
 frame_progress = 0.9639942
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -21)
+position = Vector2(0, -20.1875)
 shape = SubResource("RectangleShape2D_plk42")
+disabled = true
 
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 132
+collision_mask = 10
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(0, -20)
+position = Vector2(0, -21.5)
 shape = SubResource("RectangleShape2D_r6xse")
 debug_color = Color(0.5037288, 0.4949029, 0.8016351, 0.41960785)
+
+[node name="Area2D" type="Area2D" parent="hitbox"]
+position = Vector2(-309, -328.3333)
+collision_layer = 4
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox/Area2D"]
+position = Vector2(-42, -103.333336)
+shape = SubResource("WorldBoundaryShape2D_plk42")
+disabled = true
+
+[node name="detection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+position = Vector2(1, -21)
+shape = SubResource("CircleShape2D_plk42")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm11t4ok2vlcf"]
+
+[ext_resource type="PackedScene" uid="uid://c2t5garlnsg3o" path="res://collectables.tscn" id="1_oh1d7"]
+[ext_resource type="Script" uid="uid://bldoirbse6pup" path="res://scythe.gd" id="1_ov54h"]
+[ext_resource type="Texture2D" uid="uid://bb8arhyui6p0n" path="res://assets/weapon.png" id="2_ov54h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ov54h"]
+resource_local_to_scene = true
+radius = 8.0
+height = 16.0
+
+[node name="scythe" instance=ExtResource("1_oh1d7")]
+script = ExtResource("1_ov54h")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-7, -7)
+shape = SubResource("CapsuleShape2D_ov54h")
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-6, -6)
+texture = ExtResource("2_ov54h")

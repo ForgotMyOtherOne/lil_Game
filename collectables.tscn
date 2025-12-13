@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2t5garlnsg3o"]
+
+[ext_resource type="Script" uid="uid://diisvi5ybdon1" path="res://collectables.gd" id="1_npbb8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5cg3p"]
+resource_local_to_scene = true
+
+[node name="collectables" type="Area2D"]
+script = ExtResource("1_npbb8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5cg3p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

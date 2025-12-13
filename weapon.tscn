@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://s53l2ros627t"]
+
+[ext_resource type="Script" uid="uid://c6mfupfniddc8" path="res://weapon.gd" id="1_swcir"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_div1a"]
+radius = 337.2136
+
+[node name="weapon" type="Node2D"]
+
+[node name="weapon" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 5
+script = ExtResource("1_swcir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon"]
+shape = SubResource("CircleShape2D_div1a")
+debug_color = Color(0.6286847, 0.5307862, 0, 0.41960785)
