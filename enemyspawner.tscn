@@ -5,13 +5,11 @@
 
 [node name="enemyspawner" type="Node2D"]
 script = ExtResource("1_shps6")
+skeleton_scene = ExtResource("2_ju1km")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-ignore_time_scale = true
+[node name="SpawnTimer" type="Timer" parent="."]
 
-[node name="Skeleton" parent="." instance=ExtResource("2_ju1km")]
-collision_layer = 0
-collision_mask = 0
+[node name="CycleTimer" type="Timer" parent="."]
+one_shot = true

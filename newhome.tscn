@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt8gucmki1x3g"]
+
+[ext_resource type="PackedScene" uid="uid://bqfgb644oqmno" path="res://root.tscn" id="1_mb6u4"]
+[ext_resource type="PackedScene" uid="uid://cehqor07onqgk" path="res://restart.tscn" id="2_wite4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="root" parent="." instance=ExtResource("1_mb6u4")]
+
+[node name="restart" parent="." instance=ExtResource("2_wite4")]

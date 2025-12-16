@@ -6,15 +6,18 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ov54h"]
 resource_local_to_scene = true
-radius = 8.0
-height = 16.0
+radius = 11.0
+height = 22.0
 
-[node name="scythe" instance=ExtResource("1_oh1d7")]
+[node name="scythe" groups=["playerattack"] instance=ExtResource("1_oh1d7")]
+collision_layer = 0
+collision_mask = 68
 script = ExtResource("1_ov54h")
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-7, -7)
 shape = SubResource("CapsuleShape2D_ov54h")
+disabled = true
 
 [node name="Sprite2D" parent="." index="1"]
 position = Vector2(-6, -6)

@@ -1,73 +1,125 @@
 class_name Player
 extends CharacterBody2D
 
+# -------------------------
+# CONFIG
+# -------------------------
 @export var speed: int = 370
 @export var maxhealth: int = 5
-@export var knockback_power: int = 800  
-@export var knockback_duration: float = 0.1 
+@export var knockback_power: int = 800
+@export var knockback_duration: float = 0.1
 
+# -------------------------
+# NODES
+# -------------------------
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var effects: AnimationPlayer = $effects
 @onready var hurt: Timer = $hurt
 @onready var hurtbox: Area2D = $hurtbox
+@onready var attacks: AnimationPlayer = $attacks
 
+# -------------------------
+# STATE
+# -------------------------
 var currenthealth: int
-var ishurt: bool = false
-var knockback_vector: Vector2 = Vector2.ZERO
+var ishurt := false
+var knockback_vector := Vector2.ZERO
+var lastanimdir := "Down"
+var dead := false
 
-signal healthchanged
+# -------------------------
+# SIGNALS
+# -------------------------
+signal healthchanged(new_health: int)
+signal died
 
+# -------------------------
+# SETUP
+# -------------------------
 func _ready():
 	add_to_group("player")
 	currenthealth = maxhealth
 	effects.play("RESET")
 
+# -------------------------
+# MAIN LOOP
+# -------------------------
 func _physics_process(_delta):
+	if dead:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	handle_input()
-	
+
 	velocity += knockback_vector
 	move_and_slide()
-	
+
 	update_animation()
 	check_hurtbox()
 
+# -------------------------
+# INPUT / MOVEMENT
+# -------------------------
 func handle_input():
+	# ATTACK
+	if Input.is_action_just_pressed("attack"):
+		attacks.play("attack" + lastanimdir)
+
 	if ishurt:
 		velocity = Vector2.ZERO
 	else:
-		var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		var input_dir = Input.get_vector(
+			"ui_left", "ui_right",
+			"ui_up", "ui_down"
+		)
 		velocity = input_dir * speed
 
+# -------------------------
+# ANIMATION
+# -------------------------
 func update_animation():
 	if velocity.length() == 0 and knockback_vector.length() == 0:
 		animations.stop()
-	else:
-		var direction = "Down"
-		if velocity.x < 0:
-			direction = "Left"
-		elif velocity.x > 0:
-			direction = "Right"
-		elif velocity.y < 0:
-			direction = "Up"
-		animations.play("walk_" + direction)
-
-func check_hurtbox():
-	if ishurt:
 		return
+
+	var direction := "Down"
+
+	if abs(velocity.x) > abs(velocity.y):
+		direction = "Right" if velocity.x > 0 else "Left"
+	else:
+		direction = "Down" if velocity.y > 0 else "Up"
+
+	animations.play("walk_" + direction)
+	lastanimdir = direction
+
+# -------------------------
+# DAMAGE / HURT
+# -------------------------
+func check_hurtbox():
+	if ishurt or dead:
+		return
+
 	for area in hurtbox.get_overlapping_areas():
 		if area.name == "hitbox":
 			hurt_by_enemy(area)
+			break
 
-func hurt_by_enemy(area):
+func hurt_by_enemy(area: Area2D):
+	if dead:
+		return
+
 	currenthealth -= 1
-	if currenthealth < 0:
-		currenthealth = maxhealth
-
 	healthchanged.emit(currenthealth)
+
+	if currenthealth <= 0:
+		_die()
+		return
+
 	effects.play("hurtblink")
 	hurt.start()
 
-	# Knockback away from the enemy
+	# Knockback away from enemy
 	var enemy_pos = area.get_parent().global_position
 	var knock_dir = (global_position - enemy_pos).normalized() * knockback_power
 	apply_knockback(knock_dir)
@@ -82,12 +134,128 @@ func apply_knockback(direction: Vector2):
 	knockback_vector = Vector2.ZERO
 	ishurt = false
 
-func _on_hurtbox_area_entered(area):
+# -------------------------
+# DEATH
+# -------------------------
+func _die():
+	dead = true
+	velocity = Vector2.ZERO
+	knockback_vector = Vector2.ZERO
+	animations.stop()
+	effects.play("RESET")
+	died.emit()
+
+# -------------------------
+# PICKUPS
+# -------------------------
+func _on_hurtbox_area_entered(area: Area2D):
 	if area.has_method("collect"):
 		area.collect()
 
-func _on_hurtbox_area_exited(_area: Area2D) -> void:
-	pass
+
+#===================================================
+
+
+#class_name Player
+#extends CharacterBody2D
+#
+#@export var speed: int = 370
+#@export var maxhealth: int = 5
+#@export var knockback_power: int = 800  
+#@export var knockback_duration: float = 0.1 
+#
+#@onready var animations: AnimationPlayer = $AnimationPlayer
+#@onready var effects: AnimationPlayer = $effects
+#@onready var hurt: Timer = $hurt
+#@onready var hurtbox: Area2D = $hurtbox
+#@onready var attacks: AnimationPlayer = $attacks
+#
+#var currenthealth: int
+#var ishurt: bool = false
+#var knockback_vector: Vector2 = Vector2.ZERO
+#
+#
+#var lastanimdir: String = "Down"
+#
+#signal healthchanged
+#
+#func _ready():
+	#add_to_group("player")
+	#currenthealth = maxhealth
+	#effects.play("RESET")
+#
+#func _physics_process(_delta):
+	#handle_input()
+	#
+	#velocity += knockback_vector
+	#move_and_slide()
+	#
+	#update_animation()
+	#check_hurtbox()
+#
+#func handle_input():
+	##ATTACK HERE============================
+	#if Input.is_action_just_pressed("attack"):
+		#attacks.play("attack" + lastanimdir)
+		##============================================
+	#if ishurt:
+		#velocity = Vector2.ZERO
+	#else:
+		#var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		#velocity = input_dir * speed
+#
+#func update_animation():
+	#if velocity.length() == 0 and knockback_vector.length() == 0:
+		#animations.stop()
+	#else:
+		#var direction = "Down"
+		#if velocity.x < 0:
+			#direction = "Left"
+		#elif velocity.x > 0:
+			#direction = "Right"
+		#elif velocity.y < 0:
+			#direction = "Up"
+		#animations.play("walk_" + direction)
+		#
+		#lastanimdir = direction
+#
+#func check_hurtbox():
+	#if ishurt:
+		#return
+	#for area in hurtbox.get_overlapping_areas():
+		#if area.name == "hitbox":
+			#hurt_by_enemy(area)
+#
+#func hurt_by_enemy(area):
+	#currenthealth -= 1
+	#if currenthealth < 0:
+		#currenthealth = maxhealth
+#
+	#healthchanged.emit(currenthealth)
+	#effects.play("hurtblink")
+	#hurt.start()
+#
+	## Knockback away from the enemy
+	#var enemy_pos = area.get_parent().global_position
+	#var knock_dir = (global_position - enemy_pos).normalized() * knockback_power
+	#apply_knockback(knock_dir)
+#
+	#await hurt.timeout
+	#effects.play("RESET")
+#
+#func apply_knockback(direction: Vector2):
+	#ishurt = true
+	#knockback_vector = direction
+	#await get_tree().create_timer(knockback_duration).timeout
+	#knockback_vector = Vector2.ZERO
+	#ishurt = false
+#
+#func _on_hurtbox_area_entered(area):
+	#if area.has_method("collect"):
+		#area.collect()
+#
+#func _on_hurtbox_area_exited(_area: Area2D) -> void:
+	#pass
 
 #=========================================================
 #
